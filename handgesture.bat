@@ -20,12 +20,25 @@ if not exist .venv\Scripts\python.exe (
         exit /b 1
     )
 
-    echo [handgesture] Menginstall dependency...
     call .venv\Scripts\activate.bat
-    python -m pip install --upgrade pip
+
+    echo.
+    echo [handgesture] Update pip bersifat opsional.
+    echo Biasanya dependency tetap bisa diinstall tanpa update pip.
+    set /p UPDATE_PIP="Update pip sekarang? (y/N): "
+    if /I "%UPDATE_PIP%"=="Y" (
+        echo [handgesture] Mengupdate pip...
+        python -m pip install --upgrade pip
+        if errorlevel 1 (
+            echo Update pip gagal. Instalasi dependency akan tetap dicoba.
+        )
+    )
+
+    echo [handgesture] Menginstall dependency...
     pip install -r requirements.txt
     if errorlevel 1 (
         echo Instalasi dependency gagal.
+        echo Jika error berkaitan dengan pip terlalu lama, jalankan ulang file ini dan pilih Y saat ditanya update pip.
         pause
         exit /b 1
     )
