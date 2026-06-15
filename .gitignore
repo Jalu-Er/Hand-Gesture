@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+.venv/
+venv/
+env/
+
+backup/
+test/
+
+Laporan_Grafika_Komputer_Hand_Gesture*.docx
+~$*.docx
+.DS_Store
+Thumbs.db
